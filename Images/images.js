@@ -8,5 +8,6 @@ export default Images = {
     logo : require('../assets/logo.png'),
     bell : require('../assets/bell.png'),
     chat : require('../assets/chat.png'),
-    image1 : require('../assets/sample1.jpeg')
+    image1 : require('../assets/sample1.jpeg'),
+    right_arrow: require('../assets/right-arrow.png')
 }

@@ -7,21 +7,23 @@ const sw = Dimensions.get('window').width;
 
 const PropertyCard = (props) => {
   return (
-    <View style={styles.cardStyle}>
-      {
-        props.gender && 
-        <ImageBackground source={Images.image1} style={{width:'100%',height:sh*0.095}}>
-            <Text style={{bottom:0,position:'absolute',color:'#fff',padding:4,backgroundColor:'rgba(0,0,0,0.6)',borderRadius:4,fontSize:8,margin:8}}>{props.gender}</Text>
-        </ImageBackground>
-      }
-      <Text style={{fontSize:14,fontWeight:'bold',marginHorizontal:4}}>{props.title}</Text>
-      <Text style={{fontSize:10,marginHorizontal:4,marginTop:4}}>{props.city}</Text>
-      <View style={{borderBottomWidth:1,width:'95%',borderBottomColor:'#ababab',alignSelf:'center',marginVertical:4}} />
-      <View style={{display:'flex',flexDirection:'column'}}>
-            <Text style={{color:'#000',fontSize:10,marginHorizontal:4}}>Monthly Rent</Text>
-            <Text style={{fontSize:14,marginHorizontal:4,color:'#000'}}>₹{props.rentMin} <Text style={{fontSize:10}}>onwards</Text></Text>
-      </View>
-    </View>
+    <TouchableOpacity onPress={props.onPress}>
+        <View style={styles.cardStyle}>
+        {
+            props.gender && 
+            <ImageBackground source={Images.image1} style={{width:'100%',height:sh*0.095}}>
+                <Text style={{bottom:0,position:'absolute',color:'#fff',padding:4,backgroundColor:'rgba(0,0,0,0.6)',borderRadius:4,fontSize:8,margin:8}}>{props.gender}</Text>
+            </ImageBackground>
+        }
+            <Text style={{fontSize:14,fontWeight:'bold',marginHorizontal:4}}>{props.title}</Text>
+            <Text style={{fontSize:10,marginHorizontal:4,marginTop:4}}>{props.city}</Text>
+            <View style={{borderBottomWidth:1,width:'95%',borderBottomColor:'#ababab',alignSelf:'center',marginVertical:4}} />
+            <View style={{display:'flex',flexDirection:'column'}}>
+                    <Text style={{color:'#000',fontSize:10,marginHorizontal:4}}>Monthly Rent</Text>
+                    <Text style={{fontSize:14,marginHorizontal:4,color:'#000'}}>₹{props.rentMin} <Text style={{fontSize:10}}>onwards</Text></Text>
+            </View>
+        </View>
+    </TouchableOpacity>
   )
 }
 

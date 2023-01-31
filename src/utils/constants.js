@@ -15,4 +15,6 @@ const myZoloItems = [
         title : "Logout",
         desc : ""
     }
-]
+];
+
+export {myZoloItems};

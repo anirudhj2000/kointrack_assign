@@ -26,6 +26,8 @@ const [selectedLanguage, setSelectedLanguage] = useState();
             }>
             <Picker.Item label="Hyderabad" value="Hyderabad" />
             <Picker.Item label="Bangalore" value="Bangalore" />
+            <Picker.Item label="Chennai" value="Chennai" />
+            <Picker.Item label="Pune" value="Pune" />
         </Picker>
         <View style={{display:'flex',flexDirection:'row'}}>
             <TouchableOpacity>
