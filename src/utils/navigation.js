@@ -81,7 +81,7 @@ const ScreenNavigator = () => {
                     </View>
                 ),
             }}/>
-            <ScreenStackNavigator.Screen name="Profile" component={Profile} options={{
+            {/* <ScreenStackNavigator.Screen name="Profile" component={Profile} options={{
                 headerShown:false,
                 tabBarIcon:({focused}) =>(
                     <View style={{display:'flex',justifyContent:'center', alignItems:'center',width:'100%',marginHorizontal:10,marginTop:5}}>
@@ -94,7 +94,7 @@ const ScreenNavigator = () => {
                         <Text style={{marginVertical:2.5,color:focused?'#36629c':'#000',fontSize:12}}>Profile</Text>
                     </View>
                 ),
-            }}/>
+            }}/> */}
         </ScreenStackNavigator.Navigator>
     );
 }

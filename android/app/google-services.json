@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "362391247073",
+    "project_id": "kointrackassignment",
+    "storage_bucket": "kointrackassignment.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:362391247073:android:82fc405210cda25eab3fa0",
+        "android_client_info": {
+          "package_name": "com.kointrack_assign"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "362391247073-0p5nf60le3i543lh705to1snmp79q29p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kointrack_assign",
+            "certificate_hash": "fe485ab41f521ff673fc3ee38e31fee3e8e3feb4"
+          }
+        },
+        {
+          "client_id": "362391247073-3dt1beig5151udpa4etjvaelh0i4orhu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtjKiKRjqXghuWQla0ASzS0OCc3B7rZwM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "362391247073-3dt1beig5151udpa4etjvaelh0i4orhu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
