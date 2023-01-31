@@ -4,7 +4,7 @@ import { myZoloItems } from '../utils/constants';
 import Divider from '../components/divider';
 import MenuItem from '../components/menuItem';
 
-const Setting = () => {
+const Setting = (props) => {
   return (
     <View>
       <Text style={styles.titleStyle}>My Items</Text>
@@ -19,7 +19,7 @@ const Setting = () => {
         }}
         renderItem={({item}) => {
           return(
-            <MenuItem title={item.title} desc={item.desc} />
+            <MenuItem onPress={() => {props.navigation.navigate(item.navigation)}} title={item.title} desc={item.desc} />
           )
         }} />
     </View>

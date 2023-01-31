@@ -9,5 +9,7 @@ export default Images = {
     bell : require('../assets/bell.png'),
     chat : require('../assets/chat.png'),
     image1 : require('../assets/sample1.jpeg'),
-    right_arrow: require('../assets/right-arrow.png')
+    right_arrow: require('../assets/right-arrow.png'),
+    back : require('../assets/back.png'),
+    upload : require('../assets/upload.png')
 }

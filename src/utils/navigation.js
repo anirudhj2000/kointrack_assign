@@ -9,9 +9,20 @@ import Search from '../screens/search';
 import PropertyDetails from '../screens/propertyDetails';
 import Images from '../../Images/images';
 import Login from '../screens/login';
+import NewProperty from '../screens/newProperty';
 
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
+
+const SettingsStackNavigator = createStackNavigator();
+const SettingsStack = () => {
+    return(
+        <SettingsStackNavigator.Navigator>
+            <SettingsStackNavigator.Screen name="Settings" component={Setting} options={{headerShown:false}}/>
+            <SettingsStackNavigator.Screen name="NewProperty" component={NewProperty} options={{headerShown:false}}/>
+        </SettingsStackNavigator.Navigator>
+    )
+}
 
 
 const ScreenStackNavigator = createBottomTabNavigator();
@@ -42,7 +53,7 @@ const ScreenNavigator = () => {
                     </View>
                 ),
             }} />
-            <ScreenStackNavigator.Screen name="Setting" component={Setting} options={{
+            <ScreenStackNavigator.Screen name="Setting" component={SettingsStack} options={{
                 headerShown:false,
                 tabBarIcon:({focused}) =>(
                     <View style={{display:'flex',justifyContent:'center', alignItems:'center',width:'100%',marginHorizontal:10,marginTop:5}}>
