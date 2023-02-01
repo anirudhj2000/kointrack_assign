@@ -3,13 +3,10 @@ import React,{useState, useEffect, useReducer} from 'react'
 import Images from '../../Images/images';
 import {launchImageLibrary} from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
-import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
-import CheckBox from 'react-native-check-box';
+import RadioForm from 'react-native-simple-radio-button';
 import firebase from '@react-native-firebase/app';
 import firestore from '@react-native-firebase/firestore';
-import { check } from 'prettier';
 import Toast from 'react-native-toast-message';
-import { formatDiagnosticsWithColorAndContext } from 'typescript';
 
 
 const sh = Dimensions.get('window').height;

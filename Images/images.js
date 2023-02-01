@@ -11,5 +11,7 @@ export default Images = {
     image1 : require('../assets/sample1.jpeg'),
     right_arrow: require('../assets/right-arrow.png'),
     back : require('../assets/back.png'),
-    upload : require('../assets/upload.png')
+    upload : require('../assets/upload.png'),
+    premium : require('../assets/premium.png'),
+    house : require('../assets/office.png'),
 }

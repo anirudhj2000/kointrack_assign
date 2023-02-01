@@ -8,10 +8,10 @@ const sw = Dimensions.get('window').width;
 const PropertyCard = (props) => {
   return (
     <TouchableOpacity onPress={props.onPress}>
-        <View style={styles.cardStyle}>
+        <View style={[styles.cardStyle,props.style]}>
         {
             props.gender && 
-            <ImageBackground source={Images.image1} style={{width:'100%',height:sh*0.095}}>
+            <ImageBackground source={props.source} style={{width:'100%',height:sh*0.095}}>
                 <Text style={{bottom:0,position:'absolute',color:'#fff',padding:4,backgroundColor:'rgba(0,0,0,0.6)',borderRadius:4,fontSize:8,margin:8}}>{props.gender}</Text>
             </ImageBackground>
         }

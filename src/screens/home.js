@@ -4,33 +4,89 @@ import Images from '../../Images/images';
 import {Picker} from '@react-native-picker/picker';
 import PropertyCard from '../components/propertyCard';
 import auth from '@react-native-firebase/auth';
+import firebase from '@react-native-firebase/app';
+import firestore from '@react-native-firebase/firestore';
+import { useIsFocused } from "@react-navigation/native";
 
 const sh = Dimensions.get('window').height;
 const sw = Dimensions.get('window').width;
 
 const Home = (props) => {
-  const [selectedLanguage, setSelectedLanguage] = useState();
+  const isFocused = useIsFocused();
+  const [selectedCity, setSelectedCity] = useState('Hyderabad');
   const [toggle, setToggle] = useState(false);
+  const [listings, setListings]=  useState([]);
 
   useEffect(() => {
     checkUserExists();
-  },[])
+    setSelectedCity('Hyderabad')
+    console.log("Shit")
+  },[isFocused])
+
+  useEffect(() => {
+    setToggle(false)
+    getListings();
+  },[selectedCity,isFocused])
+
+  const getListings = async() => {
+
+    console.log(selectedCity)
+    await firestore()
+        .collection('listings')
+        // Filter results
+        .where('city', '==', selectedCity)
+        .get()
+        .then(querySnapshot => {
+            console.log('Total users: ', querySnapshot.size);
+            let arr = [];
+            querySnapshot.forEach(documentSnapshot => {
+                tempObj = documentSnapshot.data();
+                tempObj['id'] = documentSnapshot.id
+                arr = [...arr,tempObj]
+                setListings(arr)
+                console.log("arr", arr)
+        });
+        }).then(() => {setToggle(true)});
+  }
 
   const checkUserExists = () => {
     // setViewToggle(false)
         auth().onAuthStateChanged((user) => {
         if (user) {
             console.log("user exists",user)
-            props.navigation.navigate('App',{screen:'Home'})
-            setViewToggle(false);
+        }
+        else{
+            signInAnonymously();
         }
     });  
    }
 
-   const handlePropertySelect = (id) => {
-        props.navigation.navigate('ViewProperty',{id:id});
+   const signInAnonymously = () => {
+        auth()
+        .signInAnonymously()
+        .then(() => {
+        console.log('User signed in anonymously');
+        })
+        .catch(error => {
+        if (error.code === 'auth/operation-not-allowed') {
+            console.log('Enable anonymous in your firebase console.');
+        }
+    
+        console.error(error);
+        });
    }
 
+   const handlePropertySelect = (item) => {
+        props.navigation.navigate('ViewProperty',{id:item.id});
+   }
+
+   if(!toggle){
+        return(
+            <View style={{height:'100%',width:'100%',display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
+                <ActivityIndicator size={'large'} color={'#7F53AC'} style={{marginVertical:sh*0.05}}/>
+            </View>
+        )
+   }
 
 
   return (
@@ -45,9 +101,9 @@ const Home = (props) => {
             style={[styles.picker,{width:'40%',color:'#209cf5',fontSize:8,padding:0,flexGrow:0,marginLeft:'-5%'}]}
             dropdownIconColor={'#209cf5'}
             itemStyle={{color:'#209cf5'}}
-            selectedValue={selectedLanguage}
+            selectedValue={selectedCity}
             onValueChange={(itemValue, itemIndex) =>
-                setSelectedLanguage(itemValue)
+                setSelectedCity(itemValue)
             }>
             <Picker.Item label="Hyderabad" value="Hyderabad" />
             <Picker.Item label="Bangalore" value="Bangalore" />
@@ -81,17 +137,18 @@ const Home = (props) => {
         </View>
         <FlatList
             horizontal={true}
-            data={[1,2,3]}
+            data={listings}
             showsHorizontalScrollIndicator={false}
             style={{flexGrow:0,marginTop:'2.5%'}}
             renderItem={({item}) => {
                 return(
                     <PropertyCard
                         onPress = {() => {handlePropertySelect(item)}}
-                        title="zolo tulapr" 
-                        city="bangalore" 
-                        rentMin="9000"
-                        gender="unisex"/>
+                        title={item.name}
+                        city={item.city}
+                        source={{uri : item.imageUrl}}
+                        rentMin={item.price}
+                        gender={item.gender}/>
                 )
             }}/>
       </View>
@@ -104,16 +161,18 @@ const Home = (props) => {
         </View>
         <FlatList
             horizontal={true}
-            data={[1,2,3]}
+            data={listings}
             showsHorizontalScrollIndicator={false}
             style={{flexGrow:0,marginTop:'2.5%'}}
             renderItem={({item}) => {
                 return(
-                    <PropertyCard 
-                        title="zolo tulapr" 
-                        city="bangalore" 
-                        rentMin="9000"
-                        gender="unisex"/>
+                    <PropertyCard
+                        onPress = {() => {handlePropertySelect(item)}}
+                        title={item.name}
+                        city={item.city}
+                        source={{uri : item.imageUrl}}
+                        rentMin={item.price}
+                        gender={item.gender}/>
                 )
             }}/>
       </View>
