@@ -1,15 +1,40 @@
-import { View, Text, StyleSheet,Dimensions, Image, TouchableOpacity, FlatList} from 'react-native'
+import { View, Text, StyleSheet,Dimensions, Image, TouchableOpacity, FlatList,ActivityIndicator} from 'react-native'
 import React,{useState, useEffect}from 'react'
 import Images from '../../Images/images';
 import {Picker} from '@react-native-picker/picker';
 import PropertyCard from '../components/propertyCard';
+import auth from '@react-native-firebase/auth';
 
 const sh = Dimensions.get('window').height;
 const sw = Dimensions.get('window').width;
 
 const Home = (props) => {
-const [selectedLanguage, setSelectedLanguage] = useState();
+  const [selectedLanguage, setSelectedLanguage] = useState();
+  const [toggle, setToggle] = useState(false);
+
+  useEffect(() => {
+    checkUserExists();
+  },[])
+
+  const checkUserExists = () => {
+    // setViewToggle(false)
+        auth().onAuthStateChanged((user) => {
+        if (user) {
+            console.log("user exists",user)
+            props.navigation.navigate('App',{screen:'Home'})
+            setViewToggle(false);
+        }
+    });  
+   }
+
+   const handlePropertySelect = (id) => {
+        props.navigation.navigate('ViewProperty',{id:id});
+   }
+
+
+
   return (
+    // <ActivityIndicator size={'large'} color={'#7F53AC'} style={{marginVertical:sh*0.05}}/>
     <View>
       <View style={styles.logoView}>
         <Image source={Images.logo} style={{height:48,width:48}}/>
@@ -57,10 +82,12 @@ const [selectedLanguage, setSelectedLanguage] = useState();
         <FlatList
             horizontal={true}
             data={[1,2,3]}
+            showsHorizontalScrollIndicator={false}
             style={{flexGrow:0,marginTop:'2.5%'}}
             renderItem={({item}) => {
                 return(
-                    <PropertyCard 
+                    <PropertyCard
+                        onPress = {() => {handlePropertySelect(item)}}
                         title="zolo tulapr" 
                         city="bangalore" 
                         rentMin="9000"
@@ -78,6 +105,7 @@ const [selectedLanguage, setSelectedLanguage] = useState();
         <FlatList
             horizontal={true}
             data={[1,2,3]}
+            showsHorizontalScrollIndicator={false}
             style={{flexGrow:0,marginTop:'2.5%'}}
             renderItem={({item}) => {
                 return(

@@ -10,6 +10,7 @@ import PropertyDetails from '../screens/propertyDetails';
 import Images from '../../Images/images';
 import Login from '../screens/login';
 import NewProperty from '../screens/newProperty';
+import DisplayProperty from '../screens/displayProperty';
 
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
@@ -17,13 +18,22 @@ const windowWidth = Dimensions.get('window').width;
 const SettingsStackNavigator = createStackNavigator();
 const SettingsStack = () => {
     return(
-        <SettingsStackNavigator.Navigator>
+        <SettingsStackNavigator.Navigator initialRouteName='Settings'>
             <SettingsStackNavigator.Screen name="Settings" component={Setting} options={{headerShown:false}}/>
-            <SettingsStackNavigator.Screen name="NewProperty" component={NewProperty} options={{headerShown:false}}/>
+            <SettingsStackNavigator.Screen name="NewProperty" component={NewProperty} options={{headerShown:false,unmountOnBlur: true,}}/>
         </SettingsStackNavigator.Navigator>
     )
 }
 
+const HomeStackNavigator = createStackNavigator();
+const HomeStack = () => {
+    return(
+        <HomeStackNavigator.Navigator initialRouteName='HomeScreen'>
+            <HomeStackNavigator.Screen name="HomeScreen" component={Home} options={{headerShown:false}}/>
+            <HomeStackNavigator.Screen name="ViewProperty" component={DisplayProperty} options={{headerShown:false,unmountOnBlur: true,}}/>
+        </HomeStackNavigator.Navigator>
+    )
+}
 
 const ScreenStackNavigator = createBottomTabNavigator();
 const ScreenNavigator = () => {
@@ -39,7 +49,7 @@ const ScreenNavigator = () => {
                     backgroundColor:'#fff',
                 },
             }}>
-            <ScreenStackNavigator.Screen name="Home" component={Home}  options={{
+            <ScreenStackNavigator.Screen name="Home" component={HomeStack}  options={{
                 headerShown:false,
                 tabBarIcon:({focused}) =>(
                     <View style={{display:'flex',justifyContent:'center', alignItems:'center',width:'100%',marginHorizontal:10,marginTop:5}}>
